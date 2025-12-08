@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import ImpactMap from "./ImpactMap";
 
 const regions = [
   { name: "Sudan's famine arc", type: "Crisis Zone" },
@@ -13,9 +14,9 @@ const ImpactRegions = () => {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
       <div className="container relative z-10 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Section header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span className="text-sm uppercase tracking-widest text-terracotta font-medium mb-4 block">
               Where It Starts
             </span>
@@ -27,29 +28,29 @@ const ImpactRegions = () => {
             </p>
           </div>
           
-          {/* Regions grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {regions.map((region, index) => (
+          {/* Interactive Map */}
+          <div className="mb-12">
+            <ImpactMap />
+          </div>
+          
+          {/* Regions grid - condensed */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {regions.map((region) => (
               <div
                 key={region.name}
-                className="group relative p-6 bg-card/30 backdrop-blur-sm border border-border rounded-xl hover:border-terracotta/40 hover:bg-card/50 transition-all duration-300"
+                className="group flex items-center gap-3 p-4 bg-card/20 backdrop-blur-sm border border-border/50 rounded-xl hover:border-terracotta/30 transition-all duration-300"
               >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-terracotta/10 flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-terracotta" />
-                  </div>
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-muted-foreground/60 block mb-1">
-                      {region.type}
-                    </span>
-                    <h3 className="font-serif text-lg font-medium text-foreground group-hover:text-terracotta transition-colors">
-                      {region.name}
-                    </h3>
-                  </div>
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-terracotta/10 flex items-center justify-center">
+                  <MapPin className="w-4 h-4 text-terracotta" />
                 </div>
-                
-                {/* Pulse indicator */}
-                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-terracotta animate-pulse" />
+                <div className="min-w-0">
+                  <span className="text-xs text-muted-foreground/60 block">
+                    {region.type}
+                  </span>
+                  <h3 className="text-sm font-medium text-foreground truncate group-hover:text-terracotta transition-colors">
+                    {region.name}
+                  </h3>
+                </div>
               </div>
             ))}
           </div>
