@@ -1,6 +1,23 @@
 import { useState } from "react";
-import { Sun, Radio, BookOpen, Zap, MessageCircle, X, Battery, Wifi, Users, Heart, Shield, Activity } from "lucide-react";
+import { Sun, Radio, BookOpen, Zap, MessageCircle, X, Battery, Wifi, Users, Heart, Shield, Activity, ArrowRight, ArrowDown, Database, Globe, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// Data flow connections between components
+const dataFlows = [
+  { from: 1, to: 0, label: "Distress signals trigger hub response" },
+  { from: 0, to: 2, label: "Activities logged to ledger" },
+  { from: 2, to: 3, label: "Verified alerts dispatch teams" },
+  { from: 3, to: 4, label: "Field data feeds AI learning" },
+  { from: 4, to: 1, label: "AI enhances signal detection" },
+];
+
+const systemMetrics = {
+  totalNodes: 230,
+  activeConnections: 1847,
+  dataProcessed: "2.4TB",
+  uptime: "99.7%",
+  latency: "< 200ms",
+};
 
 const components = [
   {
@@ -136,6 +153,74 @@ const HowItWorks = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Five integrated components forming a survival infrastructure layer for humanity's most fragile communities.
           </p>
+        </div>
+        
+        {/* System Overview Grid */}
+        <div className="mb-16 p-6 md:p-8 bg-card/40 backdrop-blur-sm border border-border rounded-3xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-forest/15 flex items-center justify-center">
+              <Globe className="w-5 h-5 text-forest" />
+            </div>
+            <div>
+              <h3 className="font-serif text-xl font-semibold">Compassion Grid Overview</h3>
+              <p className="text-sm text-muted-foreground">Real-time system status</p>
+            </div>
+          </div>
+          
+          {/* Metrics row */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+            <div className="p-4 bg-background/50 rounded-xl border border-border/50">
+              <div className="text-2xl font-bold text-terracotta">{systemMetrics.totalNodes}</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Total Nodes</div>
+            </div>
+            <div className="p-4 bg-background/50 rounded-xl border border-border/50">
+              <div className="text-2xl font-bold text-amber">{systemMetrics.activeConnections}</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Active Links</div>
+            </div>
+            <div className="p-4 bg-background/50 rounded-xl border border-border/50">
+              <div className="text-2xl font-bold text-forest">{systemMetrics.dataProcessed}</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Data Processed</div>
+            </div>
+            <div className="p-4 bg-background/50 rounded-xl border border-border/50">
+              <div className="text-2xl font-bold text-green-500">{systemMetrics.uptime}</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Uptime</div>
+            </div>
+            <div className="p-4 bg-background/50 rounded-xl border border-border/50 col-span-2 md:col-span-1">
+              <div className="text-2xl font-bold text-foreground">{systemMetrics.latency}</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Avg Latency</div>
+            </div>
+          </div>
+
+          {/* Visual flow diagram */}
+          <div className="relative">
+            <h4 className="text-sm font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Database className="w-4 h-4 text-muted-foreground" />
+              Data Flow Architecture
+            </h4>
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+              {components.map((comp, idx) => (
+                <div key={comp.title} className="flex items-center gap-2 md:gap-3">
+                  <div className={cn(
+                    "w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-xs font-bold",
+                    comp.accent === 'terracotta' ? 'bg-terracotta/20 text-terracotta' :
+                    comp.accent === 'amber' ? 'bg-amber/20 text-amber' : 'bg-forest/20 text-forest'
+                  )}>
+                    <comp.icon className="w-5 h-5 md:w-6 md:h-6" />
+                  </div>
+                  {idx < components.length - 1 && (
+                    <ArrowRight className="w-4 h-4 text-muted-foreground/50" />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {dataFlows.map((flow, idx) => (
+                <span key={idx} className="text-xs text-muted-foreground bg-muted/30 px-3 py-1 rounded-full">
+                  {flow.label}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
         
         {/* Components list */}
