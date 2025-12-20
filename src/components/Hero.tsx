@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, ArrowDown } from "lucide-react";
+import { Heart, ArrowDown, Activity } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -40,9 +41,12 @@ const Hero = () => {
             <Button variant="hero" size="xl">
               Explore the Vision
             </Button>
-            <Button variant="heroOutline" size="xl">
-              Read the Whitepaper
-            </Button>
+            <Link to="/grid">
+              <Button variant="heroOutline" size="xl" className="gap-2">
+                <Activity className="w-4 h-4" />
+                View Live Grid
+              </Button>
+            </Link>
           </div>
           
           {/* Scroll indicator */}
