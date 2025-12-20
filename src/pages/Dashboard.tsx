@@ -13,12 +13,14 @@ import {
   Zap,
   MessageCircle,
   RefreshCw,
+  Rocket,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useGridNodes, useAlerts, useActivityLogs, useSystemMetrics } from "@/hooks/useGridData";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
+import { DeployTeamDialog } from "@/components/DeployTeamDialog";
 
 const componentIcons = {
   micro_hub: Sun,
@@ -65,6 +67,8 @@ const Dashboard = () => {
   const { getLatestMetric } = useSystemMetrics();
 
   const [selectedTab, setSelectedTab] = useState<"overview" | "alerts" | "nodes" | "activity">("overview");
+  const [deployDialogOpen, setDeployDialogOpen] = useState(false);
+  const [selectedAlert, setSelectedAlert] = useState<{ id?: string; location?: string } | null>(null);
 
   const nodesByType = nodes.reduce((acc, node) => {
     acc[node.component_type] = (acc[node.component_type] || 0) + 1;
@@ -93,11 +97,22 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/30 rounded-full">
             <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             <span className="text-xs text-red-400 font-medium">LIVE</span>
           </div>
+          <Button
+            size="sm"
+            className="gap-2 bg-terracotta hover:bg-terracotta/90"
+            onClick={() => {
+              setSelectedAlert(null);
+              setDeployDialogOpen(true);
+            }}
+          >
+            <Rocket className="w-4 h-4" />
+            Deploy Team
+          </Button>
           <Link to="/companion">
             <Button variant="outline" size="sm" className="gap-2">
               <MessageCircle className="w-4 h-4" />
@@ -269,14 +284,40 @@ const Dashboard = () => {
                             </span>
                           </div>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-wrap">
                           {alert.status === "open" && (
+                            <>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => updateAlertStatus(alert.id, "acknowledged")}
+                              >
+                                Acknowledge
+                              </Button>
+                              <Button
+                                size="sm"
+                                className="gap-1 bg-terracotta hover:bg-terracotta/90"
+                                onClick={() => {
+                                  setSelectedAlert({ id: alert.id, location: alert.location || "" });
+                                  setDeployDialogOpen(true);
+                                }}
+                              >
+                                <Rocket className="w-3 h-3" />
+                                Deploy Team
+                              </Button>
+                            </>
+                          )}
+                          {alert.status !== "resolved" && alert.status !== "open" && (
                             <Button
                               size="sm"
-                              variant="outline"
-                              onClick={() => updateAlertStatus(alert.id, "acknowledged")}
+                              className="gap-1 bg-terracotta hover:bg-terracotta/90"
+                              onClick={() => {
+                                setSelectedAlert({ id: alert.id, location: alert.location || "" });
+                                setDeployDialogOpen(true);
+                              }}
                             >
-                              Acknowledge
+                              <Rocket className="w-3 h-3" />
+                              Deploy Team
                             </Button>
                           )}
                           {alert.status !== "resolved" && (
@@ -377,6 +418,14 @@ const Dashboard = () => {
           </div>
         )}
       </main>
+
+      <DeployTeamDialog
+        open={deployDialogOpen}
+        onOpenChange={setDeployDialogOpen}
+        alertId={selectedAlert?.id}
+        defaultLocation={selectedAlert?.location || ""}
+        defaultPriority={selectedAlert?.id ? "urgent" : "standard"}
+      />
     </div>
   );
 };
