@@ -2,3 +2,6 @@ project_id = "ujwcwxprmyeqsbzjcokk"
 
 [functions.ai-companion]
 verify_jwt = false
+
+[functions.deploy-response-team]
+verify_jwt = false

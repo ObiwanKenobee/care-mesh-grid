@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -15,11 +16,13 @@ import {
   MapPin,
   CheckCircle,
   Clock,
+  Rocket,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useGridNodes } from "@/hooks/useGridData";
 import { cn } from "@/lib/utils";
+import { DeployTeamDialog } from "@/components/DeployTeamDialog";
 
 const componentData = {
   "micro-hub": {
@@ -165,6 +168,7 @@ const accentColors = {
 const ComponentDetail = () => {
   const { componentId } = useParams<{ componentId: string }>();
   const { nodes } = useGridNodes();
+  const [deployDialogOpen, setDeployDialogOpen] = useState(false);
 
   const component = componentId ? componentData[componentId as keyof typeof componentData] : null;
 
@@ -204,6 +208,16 @@ const ComponentDetail = () => {
         </div>
 
         <div className="flex items-center gap-3">
+          {component.id === "response_swarms" && (
+            <Button
+              size="sm"
+              className="gap-2 bg-terracotta hover:bg-terracotta/90"
+              onClick={() => setDeployDialogOpen(true)}
+            >
+              <Rocket className="w-4 h-4" />
+              Deploy Team
+            </Button>
+          )}
           <Link to="/dashboard">
             <Button variant="outline" size="sm">View Dashboard</Button>
           </Link>
@@ -320,6 +334,11 @@ const ComponentDetail = () => {
           </div>
         )}
       </main>
+
+      <DeployTeamDialog
+        open={deployDialogOpen}
+        onOpenChange={setDeployDialogOpen}
+      />
     </div>
   );
 };
