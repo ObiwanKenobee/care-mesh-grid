@@ -173,6 +173,63 @@ export type Database = {
           },
         ]
       }
+      donations: {
+        Row: {
+          amount_kobo: number
+          amount_ngn: number | null
+          completed_at: string | null
+          created_at: string
+          currency: string
+          donor_name: string | null
+          donor_phone: string | null
+          email: string
+          id: string
+          location: string | null
+          metadata: Json | null
+          mission_id: string | null
+          mission_type: string | null
+          notify_sms: boolean | null
+          payment_reference: string | null
+          status: string
+        }
+        Insert: {
+          amount_kobo: number
+          amount_ngn?: number | null
+          completed_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_name?: string | null
+          donor_phone?: string | null
+          email: string
+          id?: string
+          location?: string | null
+          metadata?: Json | null
+          mission_id?: string | null
+          mission_type?: string | null
+          notify_sms?: boolean | null
+          payment_reference?: string | null
+          status?: string
+        }
+        Update: {
+          amount_kobo?: number
+          amount_ngn?: number | null
+          completed_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_name?: string | null
+          donor_phone?: string | null
+          email?: string
+          id?: string
+          location?: string | null
+          metadata?: Json | null
+          mission_id?: string | null
+          mission_type?: string | null
+          notify_sms?: boolean | null
+          payment_reference?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       grid_nodes: {
         Row: {
           component_type: Database["public"]["Enums"]["component_type"]
@@ -218,6 +275,45 @@ export type Database = {
           status?: Database["public"]["Enums"]["node_status"]
           updated_at?: string
           uptime_percent?: number | null
+        }
+        Relationships: []
+      }
+      sms_notifications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          metadata: Json | null
+          notification_type: string
+          phone_number: string
+          related_id: string | null
+          sent_at: string | null
+          status: string
+          twilio_sid: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          metadata?: Json | null
+          notification_type: string
+          phone_number: string
+          related_id?: string | null
+          sent_at?: string | null
+          status?: string
+          twilio_sid?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          metadata?: Json | null
+          notification_type?: string
+          phone_number?: string
+          related_id?: string | null
+          sent_at?: string | null
+          status?: string
+          twilio_sid?: string | null
         }
         Relationships: []
       }
