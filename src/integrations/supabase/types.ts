@@ -177,6 +177,7 @@ export type Database = {
         Row: {
           amount_kobo: number
           amount_ngn: number | null
+          cancelled_at: string | null
           completed_at: string | null
           created_at: string
           currency: string
@@ -184,17 +185,22 @@ export type Database = {
           donor_phone: string | null
           email: string
           id: string
+          is_recurring: boolean | null
           location: string | null
           metadata: Json | null
           mission_id: string | null
           mission_type: string | null
+          next_payment_date: string | null
           notify_sms: boolean | null
           payment_reference: string | null
+          recurring_interval: string | null
           status: string
+          subscription_code: string | null
         }
         Insert: {
           amount_kobo: number
           amount_ngn?: number | null
+          cancelled_at?: string | null
           completed_at?: string | null
           created_at?: string
           currency?: string
@@ -202,17 +208,22 @@ export type Database = {
           donor_phone?: string | null
           email: string
           id?: string
+          is_recurring?: boolean | null
           location?: string | null
           metadata?: Json | null
           mission_id?: string | null
           mission_type?: string | null
+          next_payment_date?: string | null
           notify_sms?: boolean | null
           payment_reference?: string | null
+          recurring_interval?: string | null
           status?: string
+          subscription_code?: string | null
         }
         Update: {
           amount_kobo?: number
           amount_ngn?: number | null
+          cancelled_at?: string | null
           completed_at?: string | null
           created_at?: string
           currency?: string
@@ -220,13 +231,56 @@ export type Database = {
           donor_phone?: string | null
           email?: string
           id?: string
+          is_recurring?: boolean | null
           location?: string | null
           metadata?: Json | null
           mission_id?: string | null
           mission_type?: string | null
+          next_payment_date?: string | null
           notify_sms?: boolean | null
           payment_reference?: string | null
+          recurring_interval?: string | null
           status?: string
+          subscription_code?: string | null
+        }
+        Relationships: []
+      }
+      email_logs: {
+        Row: {
+          created_at: string
+          email: string
+          email_type: string
+          id: string
+          metadata: Json | null
+          related_id: string | null
+          resend_id: string | null
+          sent_at: string | null
+          status: string
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          email_type: string
+          id?: string
+          metadata?: Json | null
+          related_id?: string | null
+          resend_id?: string | null
+          sent_at?: string | null
+          status?: string
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          email_type?: string
+          id?: string
+          metadata?: Json | null
+          related_id?: string | null
+          resend_id?: string | null
+          sent_at?: string | null
+          status?: string
+          subject?: string
         }
         Relationships: []
       }
@@ -314,6 +368,72 @@ export type Database = {
           sent_at?: string | null
           status?: string
           twilio_sid?: string | null
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          amount_kobo: number
+          authorization_code: string | null
+          cancelled_at: string | null
+          created_at: string
+          currency: string
+          donor_name: string | null
+          donor_phone: string | null
+          email: string
+          id: string
+          interval: string
+          location: string | null
+          metadata: Json | null
+          mission_type: string | null
+          next_payment_date: string | null
+          notify_email: boolean | null
+          notify_sms: boolean | null
+          status: string
+          subscription_code: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount_kobo: number
+          authorization_code?: string | null
+          cancelled_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_name?: string | null
+          donor_phone?: string | null
+          email: string
+          id?: string
+          interval?: string
+          location?: string | null
+          metadata?: Json | null
+          mission_type?: string | null
+          next_payment_date?: string | null
+          notify_email?: boolean | null
+          notify_sms?: boolean | null
+          status?: string
+          subscription_code?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount_kobo?: number
+          authorization_code?: string | null
+          cancelled_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_name?: string | null
+          donor_phone?: string | null
+          email?: string
+          id?: string
+          interval?: string
+          location?: string | null
+          metadata?: Json | null
+          mission_type?: string | null
+          next_payment_date?: string | null
+          notify_email?: boolean | null
+          notify_sms?: boolean | null
+          status?: string
+          subscription_code?: string | null
+          updated_at?: string
         }
         Relationships: []
       }
