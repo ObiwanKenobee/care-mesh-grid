@@ -14,6 +14,7 @@ import {
   MessageCircle,
   RefreshCw,
   Rocket,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -113,6 +114,12 @@ const Dashboard = () => {
             <Rocket className="w-4 h-4" />
             Deploy Team
           </Button>
+          <Link to="/tracking">
+            <Button variant="outline" size="sm" className="gap-2">
+              <MapPin className="w-4 h-4" />
+              Tracking
+            </Button>
+          </Link>
           <Link to="/companion">
             <Button variant="outline" size="sm" className="gap-2">
               <MessageCircle className="w-4 h-4" />

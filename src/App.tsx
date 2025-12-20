@@ -8,6 +8,7 @@ import Grid from "./pages/Grid";
 import Dashboard from "./pages/Dashboard";
 import Companion from "./pages/Companion";
 import ComponentDetail from "./pages/ComponentDetail";
+import Tracking from "./pages/Tracking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/grid" element={<Grid />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/companion" element={<Companion />} />
+          <Route path="/tracking" element={<Tracking />} />
           <Route path="/component/:componentId" element={<ComponentDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

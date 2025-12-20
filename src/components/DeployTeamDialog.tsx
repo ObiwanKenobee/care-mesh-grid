@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { useDeployTeam } from "@/hooks/useDeployTeam";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { Zap, MapPin, Users, AlertTriangle, Loader2, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -52,6 +53,7 @@ export const DeployTeamDialog = ({
   defaultPriority = "standard",
 }: DeployTeamDialogProps) => {
   const { deployTeam, loading, lastDeployment } = useDeployTeam();
+  const { notifyDeployment } = usePushNotifications();
   const [deployed, setDeployed] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -75,6 +77,7 @@ export const DeployTeamDialog = ({
     });
 
     if (result) {
+      notifyDeployment(result.teams_deployed, formData.location, formData.missionType);
       setDeployed(true);
     }
   };
