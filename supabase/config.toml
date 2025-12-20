@@ -5,3 +5,12 @@ verify_jwt = false
 
 [functions.deploy-response-team]
 verify_jwt = false
+
+[functions.get-mapbox-token]
+verify_jwt = false
+
+[functions.paystack-payment]
+verify_jwt = false
+
+[functions.paystack-webhook]
+verify_jwt = false
