@@ -116,14 +116,12 @@ const DonorDashboard = () => {
       // Initialize payment first
       const result = await openPaymentPage({
         email: newSub.email,
-        amount: newSub.amount,
-        donorName: newSub.donor_name,
+        missionId: `monthly-${Date.now()}`,
         missionType: newSub.mission_type,
         location: "Monthly Sponsor",
-        notifySms: newSub.notify_sms,
       });
 
-      if (result?.success) {
+      if (result?.authorization_url) {
         // Create subscription record
         await createSubscription({
           email: newSub.email,

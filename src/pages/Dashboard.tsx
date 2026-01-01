@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   Activity,
   AlertTriangle,
   CheckCircle,
@@ -18,6 +17,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { useGridNodes, useAlerts, useActivityLogs, useSystemMetrics } from "@/hooks/useGridData";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
@@ -81,28 +82,21 @@ const Dashboard = () => {
   const criticalAlerts = alerts.filter((a) => a.severity === "critical" && a.status === "open").length;
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 border-b border-border bg-card/80 backdrop-blur-sm">
-        <div className="flex items-center gap-4">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Button>
-          </Link>
-          <div className="h-6 w-px bg-border" />
-          <div className="flex items-center gap-2">
-            <Activity className="w-5 h-5 text-forest" />
-            <h1 className="font-serif text-xl font-semibold">Control Dashboard</h1>
-          </div>
-        </div>
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
 
+      {/* Page header */}
+      <div className="sticky top-16 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-card/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
+          <Activity className="w-5 h-5 text-forest" />
+          <h1 className="font-serif text-xl font-semibold">Control Dashboard</h1>
           <div className="flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/30 rounded-full">
             <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             <span className="text-xs text-red-400 font-medium">LIVE</span>
           </div>
+        </div>
+
+        <div className="flex items-center gap-3">
           <Button
             size="sm"
             className="gap-2 bg-terracotta hover:bg-terracotta/90"
@@ -114,20 +108,8 @@ const Dashboard = () => {
             <Rocket className="w-4 h-4" />
             Deploy Team
           </Button>
-          <Link to="/tracking">
-            <Button variant="outline" size="sm" className="gap-2">
-              <MapPin className="w-4 h-4" />
-              Tracking
-            </Button>
-          </Link>
-          <Link to="/companion">
-            <Button variant="outline" size="sm" className="gap-2">
-              <MessageCircle className="w-4 h-4" />
-              AI Companion
-            </Button>
-          </Link>
         </div>
-      </header>
+      </div>
 
       {/* Tab navigation */}
       <div className="border-b border-border bg-card/50">

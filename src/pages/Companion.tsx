@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   MessageCircle,
   Send,
   Trash2,
@@ -11,6 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import Header from "@/components/Header";
 import { useAICompanion } from "@/hooks/useAICompanion";
 import { cn } from "@/lib/utils";
 
@@ -56,25 +55,18 @@ const Companion = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 border-b border-border bg-card/80 backdrop-blur-sm">
-        <div className="flex items-center gap-4">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Button>
-          </Link>
-          <div className="h-6 w-px bg-border" />
-          <div className="flex items-center gap-2">
-            <div className="relative">
-              <MessageCircle className="w-5 h-5 text-amber" />
-              <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            </div>
-            <div>
-              <h1 className="font-serif text-lg font-semibold">AI Companion</h1>
-              <p className="text-xs text-muted-foreground">Here to help, 24/7</p>
-            </div>
+      <Header />
+
+      {/* Page header */}
+      <div className="sticky top-16 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-card/80 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <MessageCircle className="w-5 h-5 text-amber" />
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          </div>
+          <div>
+            <h1 className="font-serif text-lg font-semibold">AI Companion</h1>
+            <p className="text-xs text-muted-foreground">Here to help, 24/7</p>
           </div>
         </div>
 
@@ -90,7 +82,7 @@ const Companion = () => {
             </Button>
           )}
         </div>
-      </header>
+      </div>
 
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto p-6">

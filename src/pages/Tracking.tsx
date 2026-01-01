@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   MapPin,
   Activity,
-  MessageCircle,
   Rocket,
   Bell,
   BellOff,
@@ -12,6 +9,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import TeamTrackingMap from "@/components/TeamTrackingMap";
 import { DeployTeamDialog } from "@/components/DeployTeamDialog";
 import { MissionCompletionDialog } from "@/components/MissionCompletionDialog";
@@ -51,20 +50,13 @@ const Tracking = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 border-b border-border bg-card/80 backdrop-blur-sm">
-        <div className="flex items-center gap-4">
-          <Link to="/dashboard">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Dashboard
-            </Button>
-          </Link>
-          <div className="h-6 w-px bg-border" />
-          <div className="flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-terracotta" />
-            <h1 className="font-serif text-xl font-semibold">Team Tracking</h1>
-          </div>
+      <Header />
+
+      {/* Page header */}
+      <div className="sticky top-16 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-card/80 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <MapPin className="w-5 h-5 text-terracotta" />
+          <h1 className="font-serif text-xl font-semibold">Team Tracking</h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -99,15 +91,8 @@ const Tracking = () => {
             <Rocket className="w-4 h-4" />
             Deploy Team
           </Button>
-
-          <Link to="/companion">
-            <Button variant="outline" size="sm" className="gap-2">
-              <MessageCircle className="w-4 h-4" />
-              AI Companion
-            </Button>
-          </Link>
         </div>
-      </header>
+      </div>
 
       <div className="flex-1 flex flex-col lg:flex-row">
         {/* Map */}
