@@ -6,7 +6,6 @@ import {
   BookOpen,
   Zap,
   MessageCircle,
-  ArrowLeft,
   Activity,
   Globe,
   Pause,
@@ -19,6 +18,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 
 // Node colors
@@ -389,20 +390,13 @@ const Grid = () => {
       ref={containerRef}
       className="min-h-screen bg-background flex flex-col"
     >
-      {/* Header */}
-      <header className="relative z-20 flex items-center justify-between px-6 py-4 border-b border-border bg-card/50 backdrop-blur-sm">
-        <div className="flex items-center gap-4">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Button>
-          </Link>
-          <div className="h-6 w-px bg-border" />
-          <div className="flex items-center gap-2">
-            <Globe className="w-5 h-5 text-forest" />
-            <h1 className="font-serif text-xl font-semibold">Compassion Grid</h1>
-          </div>
+      <Header />
+
+      {/* Page header */}
+      <div className="relative z-20 flex items-center justify-between px-6 py-4 border-b border-border bg-card/50 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <Globe className="w-5 h-5 text-forest" />
+          <h1 className="font-serif text-xl font-semibold">Compassion Grid</h1>
         </div>
 
         <div className="flex items-center gap-4">
@@ -432,7 +426,7 @@ const Grid = () => {
             Controls
           </Button>
         </div>
-      </header>
+      </div>
 
       <div className="flex-1 flex">
         {/* Main visualization */}
